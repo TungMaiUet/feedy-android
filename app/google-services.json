@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "99628620215",
+    "project_id": "feedy-161406"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99628620215:android:a68c607c655e9ea3",
+        "android_client_info": {
+          "package_name": "com.example.tungmai.feedy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99628620215-mngl75u2ujsuacm8ktaufc1r3c2agk6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBewhIRT6mg1e9M5bVG2vAU7kAoRumhdNU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

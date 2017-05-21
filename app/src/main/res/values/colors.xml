@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="color_backgroup_login">#006064</color>
+    <color name="white">#fff</color>
+    <color name="normanTab">#bebdbd</color>
+    <color name="colorBackgroudTabLayout">#391ab3</color>
+    <color name="black">#000</color>
+    <color name="color_like_blog">#E53935</color>
+    <color name="color_like_blog_false">#212121</color>
+</resources>

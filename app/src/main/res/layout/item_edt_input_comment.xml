@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:id="@+id/edt_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btn_cancel"
+            android:background="@drawable/backgroup_edt_comment"
+            android:elevation="2dp"
+            android:hint="Viết reply của bạn"
+            android:padding="13dp" />
+
+        <TextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btn_send"
+            android:layout_centerVertical="true"
+            android:background="@drawable/backgroup_edt_comment"
+            android:text="Hủy"
+            android:textSize="18sp"
+            android:padding="5dp"/>
+
+        <TextView
+            android:padding="5dp"
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/backgroup_edt_comment"
+            android:text="Gửi"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</LinearLayout>
