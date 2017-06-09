@@ -31,7 +31,7 @@ public class FeedyService extends Service {
 
     {
         try {
-            mSocket = IO.socket("http://192.168.0.100:8000");
+            mSocket = IO.socket(ConnectSever.IP_SEVER);
         } catch (Exception e) {
             e.printStackTrace();
         }

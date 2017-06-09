@@ -140,7 +140,7 @@ public class CommentBlogActivity extends AppCompatActivity implements View.OnCli
 
     {
         try {
-            mSocket = IO.socket(/*ConnectSever.IP_SEVER*/"http://192.168.0.100:8000");
+            mSocket = IO.socket(ConnectSever.IP_SEVER);
         } catch (Exception e) {
             e.printStackTrace();
         }

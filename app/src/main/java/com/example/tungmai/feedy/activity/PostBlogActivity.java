@@ -42,9 +42,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-/**
- * Created by TungMai on 3/15/2017.
- */
 
 public class PostBlogActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -86,6 +83,8 @@ public class PostBlogActivity extends AppCompatActivity implements View.OnClickL
         Picasso.with(this).load(ConnectSever.IP_SEVER + user.getImageUser()).into(ivProfile);
         tvName = (TextView) findViewById(R.id.tv_name);
         tvName.setText(user.getName());
+
+        edtInput = (EditText) findViewById(R.id.edt_input);
 
         expandableHeightGridView = (ExpandableHeightGridView) findViewById(R.id.grid_view);
         expandableHeightGridView.setExpanded(true);

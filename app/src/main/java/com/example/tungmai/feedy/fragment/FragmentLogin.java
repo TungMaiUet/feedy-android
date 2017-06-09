@@ -61,7 +61,7 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
     //    private LoginButton loginButton;
     private TextView tvRegister;
 
-    private SaveSharedPreference saveSharedPreference;
+//    private SaveSharedPreference saveSharedPreference;
 //    private CallbackManager callbackManager;
 
     @Nullable
@@ -70,7 +70,7 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_login, container, false);
 //        initLoginFacebook();
 //        sharedPreferences = getActivity().getSharedPreferences("my_account", getActivity().MODE_PRIVATE);
-        saveSharedPreference = new SaveSharedPreference();
+//        saveSharedPreference = new SaveSharedPreference();
 //        if(saveSharedPreference.getUserName(getActivity()/))
         initViews();
         return view;
@@ -130,16 +130,16 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
         edtEmail = (EditText) view.findViewById(R.id.edt_username);
         edtPassword = (EditText) view.findViewById(R.id.edt_password);
 
-        edtEmail.setText(saveSharedPreference.getUserName(getActivity().getBaseContext()));
-        edtPassword.setText(saveSharedPreference.getPassword(getActivity().getBaseContext()));
+//        edtEmail.setText(saveSharedPreference.getUserName(getActivity().getBaseContext()));
+//        edtPassword.setText(saveSharedPreference.getPassword(getActivity().getBaseContext()));
 
-        if (!edtEmail.getText().toString().trim().equals("") && !edtPassword.getText().toString().trim().equals("")) {
-            HashMap<String, String> mapLogin = new HashMap<>();
-            mapLogin.put("email", edtEmail.getText().toString());
-            mapLogin.put("password", edtPassword.getText().toString());
-            GetLoadingDataAsyncTask loginAsyncTask = new GetLoadingDataAsyncTask(handler, getActivity(), WHAT_LOGIN);
-            loginAsyncTask.execute(ConnectSever.LINK_SERVER_LOGIN + "/" + edtEmail.getText().toString() + "/" + edtPassword.getText().toString());
-        }
+//        if (!edtEmail.getText().toString().trim().equals("") && !edtPassword.getText().toString().trim().equals("")) {
+//            HashMap<String, String> mapLogin = new HashMap<>();
+//            mapLogin.put("email", edtEmail.getText().toString());
+//            mapLogin.put("password", edtPassword.getText().toString());
+//            GetLoadingDataAsyncTask loginAsyncTask = new GetLoadingDataAsyncTask(handler, getActivity(), WHAT_LOGIN);
+//            loginAsyncTask.execute(ConnectSever.LINK_SERVER_LOGIN + "/" + edtEmail.getText().toString() + "/" + edtPassword.getText().toString());
+//        }
 
         btnLogin = (Button) view.findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(this);
@@ -177,8 +177,8 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
                     Toast.makeText(getActivity().getBaseContext(), "Bạn nhập không đủ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (chbSave.isChecked())
-                    saveSharedPreference.setUserName(getActivity().getBaseContext(), edtEmail.getText().toString(), edtPassword.getText().toString());
+//                if (chbSave.isChecked())
+//                    saveSharedPreference.setUserName(getActivity().getBaseContext(), edtEmail.getText().toString(), edtPassword.getText().toString());
                 HashMap<String, String> mapLogin = new HashMap<>();
                 mapLogin.put("email", email);
                 mapLogin.put("password", password);
