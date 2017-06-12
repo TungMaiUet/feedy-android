@@ -1,5 +1,6 @@
 package com.example.tungmai.feedy.fragment;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -31,6 +32,8 @@ import com.example.tungmai.feedy.api.ConnectSever;
 import com.example.tungmai.feedy.asynctask.GetLoadingDataAsyncTask;
 import com.example.tungmai.feedy.asynctask.PostLoadingDataAsyncTask;
 import com.example.tungmai.feedy.models.User;
+import com.google.android.gms.playlog.internal.LogEvent;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +53,7 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
     private static final int WHAT_FORGET_PASSWORD = 421;
     public static final String INTENT_USER = "intent user";
     public static final String INTENT_ITEM_BLOG = "inten item blog";
+    public static final int REQUEST_CODE_LOGIN = 9237;
 
 
     private View view;
@@ -61,77 +65,37 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
     //    private LoginButton loginButton;
     private TextView tvRegister;
 
-//    private SaveSharedPreference saveSharedPreference;
+    private SaveSharedPreference saveSharedPreference;
 //    private CallbackManager callbackManager;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_login, container, false);
-//        initLoginFacebook();
 //        sharedPreferences = getActivity().getSharedPreferences("my_account", getActivity().MODE_PRIVATE);
-//        saveSharedPreference = new SaveSharedPreference();
+        saveSharedPreference = new SaveSharedPreference();
+
+        Log.e(TAG, "bbb");
+        if (saveSharedPreference.getUser(getActivity().getBaseContext()) != null) {
+            Log.e(TAG, "aa");
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            User user = saveSharedPreference.getUser(getActivity().getBaseContext());
+            intent.putExtra(INTENT_USER, user);
+            startActivityForResult(intent, REQUEST_CODE_LOGIN);
+        }
+
 //        if(saveSharedPreference.getUserName(getActivity()/))
         initViews();
         return view;
     }
 
-//    private void initLoginFacebook() {
-//        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
-//        callbackManager = CallbackManager.Factory.create();
-//        final LoginButton loginButton = (LoginButton) view.findViewById(R.id.btn_login_by_facebook);
-//        loginButton.setFragment(this);
-//        loginButton.setReadPermissions(Arrays.asList(
-//                "public_profile", "email", "user_birthday", "user_friends"));
-//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-//            @Override
-//            public void onSuccess(LoginResult loginResult) {
-//                GraphRequest.newMeRequest(
-//                        loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-//                            @Override
-//                            public void onCompleted(JSONObject object, GraphResponse response) {
-//                                if (response.getError() != null) {
-//                                    // handle error
-//                                } else {
-//                                    String id = null;
-//                                    try {
-//                                        id = object.getString("id");
-//                                        String name = object.getString("name");
-//                                        String email = object.getString("email");
-//                                        String gender = object.getString("gender");
-//                                        String birthday = object.getString("birthday");
-//                                        Log.e(TAG, id + "," + name + "," + email + "," + "," + gender + ", " + birthday);
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }
-//                        }).executeAsync();
-//
-////                Bundle parameters = new Bundle();
-////                parameters.putString("fields", "id,name,email,gender,birthday");
-////                request.setParameters(parameters);
-////                request.executeAsync();
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//                // App code
-//            }
-//
-//            @Override
-//            public void onError(FacebookException exception) {
-//                // App code
-//            }
-//        });
-//    }
 
     private void initViews() {
         edtEmail = (EditText) view.findViewById(R.id.edt_username);
         edtPassword = (EditText) view.findViewById(R.id.edt_password);
 
-//        edtEmail.setText(saveSharedPreference.getUserName(getActivity().getBaseContext()));
-//        edtPassword.setText(saveSharedPreference.getPassword(getActivity().getBaseContext()));
+        edtEmail.setText(saveSharedPreference.getUserName(getActivity().getBaseContext()));
+        edtPassword.setText(saveSharedPreference.getPassword(getActivity().getBaseContext()));
 
 //        if (!edtEmail.getText().toString().trim().equals("") && !edtPassword.getText().toString().trim().equals("")) {
 //            HashMap<String, String> mapLogin = new HashMap<>();
@@ -146,15 +110,15 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
 
         chbSave = (CheckBox) view.findViewById(R.id.checkbox);
 //        chbSave.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
+////            @Override
 //            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 //                if (isChecked) {
 //                    saveSharedPreference.setUserName(getActivity().getBaseContext(),edtEmail.getText().toString(),edtPassword.getText().toString());
-////                    Log.e(TAG, "aaaa");
-////                    SharedPreferences.Editor edit = sharedPreferences.edit();
-////                    edit.putString("username", edtEmail.getText().toString());
-////                    edit.putString("password", edtPassword.getText().toString());
-////                    edit.commit();
+//////                    Log.e(TAG, "aaaa");
+//                    SharedPreferences.Editor edit = sharedPreferences.edit();
+//                    edit.putString("username", edtEmail.getText().toString());
+//                    edit.putString("password", edtPassword.getText().toString());
+//                    edit.commit();
 //                }
 //            }
 //        });
@@ -177,8 +141,9 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
                     Toast.makeText(getActivity().getBaseContext(), "Bạn nhập không đủ", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                if (chbSave.isChecked())
-//                    saveSharedPreference.setUserName(getActivity().getBaseContext(), edtEmail.getText().toString(), edtPassword.getText().toString());
+                if (chbSave.isChecked()) {
+                    saveSharedPreference.setUserName(getActivity().getBaseContext(), edtEmail.getText().toString(), edtPassword.getText().toString());
+                }
                 HashMap<String, String> mapLogin = new HashMap<>();
                 mapLogin.put("email", email);
                 mapLogin.put("password", password);
@@ -208,6 +173,7 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
     }
 
     private Handler handler = new Handler() {
+        @TargetApi(Build.VERSION_CODES.M)
         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
         @Override
         public void handleMessage(Message msg) {
@@ -237,9 +203,13 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
                         String urlImage = jsonObject.getString("image");
                         String birth = jsonObject.getString("birth");
                         User user = new User(id, name, email, gender, birth, urlImage);
+
+                        if (chbSave.isChecked())
+                            saveSharedPreference.setUser(getActivity().getBaseContext(), user);
+
                         Intent intent = new Intent(getActivity(), HomeActivity.class);
                         intent.putExtra(INTENT_USER, user);
-                        startActivity(intent);
+                        startActivityForResult(intent, REQUEST_CODE_LOGIN);
 //                        Log.e(TAG,user.getImageUser());
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -271,15 +241,18 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
         }
     };
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        callbackManager.onActivityResult(requestCode, resultCode, data);
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK) {
+            saveSharedPreference.logOut(getActivity().getBaseContext());
+        }
+    }
 
     class SaveSharedPreference {
         static final String PREF_USER_NAME = "username";
         static final String PREF_PASSWORD = "password";
+        static final String PREF_USER = "user-pref";
 
         public SharedPreferences getSharedPreferences(Context ctx) {
             return PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -292,12 +265,35 @@ public class FragmentLogin extends Fragment implements View.OnClickListener {
             editor.commit();
         }
 
+        public void setUser(Context ctx, User user) {
+            SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+            Gson gson = new Gson();
+            String json = gson.toJson(user);
+            editor.putString(PREF_USER, json);
+            editor.commit();
+        }
+
         public String getUserName(Context ctx) {
             return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
         }
 
         public String getPassword(Context ctx) {
             return getSharedPreferences(ctx).getString(PREF_PASSWORD, "");
+        }
+
+        public User getUser(Context ctx) {
+            Gson gson = new Gson();
+            String json = getSharedPreferences(ctx).getString(PREF_USER, "");
+            Log.e(TAG, json + "cc");
+            User obj = gson.fromJson(json, User.class);
+            return obj;
+        }
+
+        public void logOut(Context ctx) {
+            SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+            Log.e(TAG, "logout");
+            editor.clear();
+            editor.commit();
         }
     }
 }

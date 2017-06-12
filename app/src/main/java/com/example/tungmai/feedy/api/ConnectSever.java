@@ -51,7 +51,7 @@ import java.util.List;
 
 public class ConnectSever {
         public static final String IP_SEVER = "https://feedyandroid.herokuapp.com";
-//    public static final String IP_SEVER = "http://192.168.0.102:3000";
+//    public static final String IP_SEVER = "http://192.168.0.103:3000";
     public static final String LINK_SERVER_LOGIN = IP_SEVER + "/users/login";
     public static final String LINK_SERVER_LOGIN_FORGET = IP_SEVER + "/users/login/forget";
     public static final String LINK_SERVER_REGISTER = IP_SEVER + "/users/register";

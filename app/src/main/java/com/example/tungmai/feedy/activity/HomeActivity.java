@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.tungmai.feedy.R;
 import com.example.tungmai.feedy.api.ConnectSever;
 import com.example.tungmai.feedy.custominterface.LoadRefressBlog;
+import com.example.tungmai.feedy.custominterface.LogOut;
 import com.example.tungmai.feedy.dialog.ListPreparDialog;
 import com.example.tungmai.feedy.fragment.BlogFragment;
 import com.example.tungmai.feedy.fragment.FeedySaveFragment;
@@ -184,6 +185,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.logout:
                         drawerLayout.closeDrawers();
+                        setResult(RESULT_OK);
                         finish();
                         break;
                 }

@@ -1,6 +1,7 @@
 package com.example.tungmai.feedy.activity;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -55,4 +56,10 @@ public class LoginActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout, fragmentLogin);
         fragmentTransaction.commit();
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Log.e("FKLS","flkds");
+//    }
 }
