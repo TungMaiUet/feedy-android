@@ -132,19 +132,14 @@ public class FeedyUserActivity extends AppCompatActivity implements View.OnClick
                                 valuation = true;
                                 valuationUser = vote;
                             }
+
                             valuationFeedy = (valuationFeedy + vote);
                         }
 
                         valuationFeedy = valuationFeedy / valuationVote;
-//                        if (valuationFeedy % 1 > 5) valuationFeedy = (int) valuationFeedy / 1 + 1;
-//                        else{
-//
-//                        }
 
-//                        int valuationFeedyTemp = (int) Math.round(valuationFeedy * 10);
-//                        Double temp = Double.valueOf(valuationFeedyTemp/10);
-//                        Log.e("aaaaaaaa", temp + "");
                         initStar(valuationFeedy);
+//                        initStar(3.5);
 
 
                         JSONObject jsonObjectUser = jsonObject1.getJSONObject("user");
@@ -322,13 +317,6 @@ public class FeedyUserActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initStar(double star) {
-        double starLate = star % 1;
-        if (starLate < 0.5) {
-            star--;
-        } else if (starLate > 0.5) {
-            star++;
-        }
-
         ImageView ivStar1 = (ImageView) findViewById(R.id.iv_star_1);
         ImageView ivStar2 = (ImageView) findViewById(R.id.iv_star_2);
         ImageView ivStar3 = (ImageView) findViewById(R.id.iv_star_3);
@@ -340,7 +328,16 @@ public class FeedyUserActivity extends AppCompatActivity implements View.OnClick
         ivStar3.setImageDrawable(getResources().getDrawable(R.drawable.star));
         ivStar4.setImageDrawable(getResources().getDrawable(R.drawable.star));
         ivStar5.setImageDrawable(getResources().getDrawable(R.drawable.star));
-        switch ((int) (star / 1)) {
+//        double starLate = star % 1;
+//        if (starLate < 0.5) {
+//            star--;
+//        } else if (starLate > 0.5) {
+//            star++;
+//        }
+        double starLater = star % 1;
+        int starMain = (int) (star / 1);
+        if (starLater > 0.5) starMain++;
+        switch (starMain) {
             case 1:
                 ivStar1.setImageDrawable(getResources().getDrawable(R.drawable.bookmark_star));
                 break;
@@ -368,8 +365,9 @@ public class FeedyUserActivity extends AppCompatActivity implements View.OnClick
                 break;
         }
 
-        if (star % 1 == 0.5) {
-            switch ((int) (star / 1)) {
+
+        if (starLater == 0.5) {
+            switch (starMain) {
                 case 0:
                     ivStar1.setImageDrawable(getResources().getDrawable(R.drawable.star_half_empty));
                     break;

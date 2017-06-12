@@ -57,10 +57,8 @@ public class TipsActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
 //        webView.getSettings().setDomStorageEnabled(true);
 //        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-//        webView.loadUrl("http://hinhnendepnhat.net/anh-dep-thien-nhien");
-//        webView.loadUrl(ConnectSever.LINK_SERVER_GET_TIPS + idTips);
-        webView.loadUrl("http://192.168.0.103:3000/tips/gettips/" + idTips);
-//        webView.loadDataWithBaseURL(ConnectSever.LINK_SERVER_GET_TIPS + idTips, null, "text/html", "utf-8", null);
+        webView.loadUrl("http://feedyandroid.herokuapp.com/tips/gettips/" + idTips);
+//        webView.loadUrl("http://192.168.0.104:3000/tips/gettips/" + idTips);
     }
 
     private class MyBrowser extends WebViewClient {
@@ -74,7 +72,7 @@ public class TipsActivity extends AppCompatActivity {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
             prDialog = new ProgressDialog(TipsActivity.this);
-            prDialog.setMessage("Please wait ...");
+            prDialog.setMessage("Xin hãy đợi ...");
             prDialog.show();
         }
 

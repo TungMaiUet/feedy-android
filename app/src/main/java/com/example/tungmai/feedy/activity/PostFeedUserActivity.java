@@ -80,7 +80,7 @@ public class PostFeedUserActivity extends AppCompatActivity implements View.OnCl
     private Button btnOkPrepare;
     private ExpandableHeightListView lvPrepare;
     private ItemChoosePrepareAdapter itemChoosePrepareAdapter;
-//    private ArrayList<String> countPrepare;
+    //    private ArrayList<String> countPrepare;
     private ArrayList<ItemPrepare> countPrepare;
 
 
@@ -120,7 +120,7 @@ public class PostFeedUserActivity extends AppCompatActivity implements View.OnCl
 
     private void initViews() {
         ivUser = (ImageView) findViewById(R.id.iv_profile);
-        Picasso.with(this).load(ConnectSever.IP_SEVER+user.getImageUser());
+        Picasso.with(this).load(ConnectSever.IP_SEVER + user.getImageUser());
         tvNameUser = (TextView) findViewById(R.id.tv_name);
         tvNameUser.setText(user.getName());
 
@@ -238,9 +238,9 @@ public class PostFeedUserActivity extends AppCompatActivity implements View.OnCl
                 map.put("user_image", user.getImageUser());
                 map.put("name_feedy", nameFeedy);
                 map.put("intro_feedy", introFeedy);
-                map.put("time_prepare",timePrepare);
-                map.put("time_making",timeMaking);
-                map.put("level",level);
+                map.put("time_prepare", timePrepare);
+                map.put("time_making", timeMaking);
+                map.put("level", level);
                 map.put("time", time);
                 PostLoadingDataAsyncTask loginAsyncTask = new PostLoadingDataAsyncTask(WHAT_POST_FEEDY, handler, this, ConnectSever.LINK_SERVER_POST_FEEDY_USER);
                 HashMap<String, String> mapFileFeedy = new HashMap<>();
@@ -260,7 +260,7 @@ public class PostFeedUserActivity extends AppCompatActivity implements View.OnCl
 //                    Log.e("aaaaa",countPrepare.get(i).getUnit());
                 }
                 loginAsyncTask.execute(map, mapFileFeedy);
-
+                finish();
                 return true;
             case android.R.id.home:
 //                setResult(RESULT_OK);
